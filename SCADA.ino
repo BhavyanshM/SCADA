@@ -81,10 +81,22 @@ State S0(){
    Serial.println("State_0");
    xpand1.port(0x0000);
    if(input==0x10 || input==0x11)STM.Set(S1);
+   if(input==0x40 || input==0x41)STM.Set(S2);
 }
 
 State S1(){
   Serial.println("State_1");
   xpand1.port(0xFFFF);
   if(input==0x20 || input==0x21)STM.Set(S0); 
+  if(input==0x40 || input==0x41)STM.Set(S2); 
+}
+
+State S2(){
+  Serial.println("State_2");
+  i++;i%=0xFF;
+  dac1.analogWrite(2048);
+  xpand1.port(i);
+  delay(200);
+  if(input==0x20 || input==0x21)STM.Set(S0);
+  if(input==0x10 || input==0x11)STM.Set(S1);
 }
