@@ -46,33 +46,9 @@ void setup() {
 int input = 0;
 int i = 0;
 void loop() {
-  // put your main code here, to run repeatedly:
   input = xpand1.port()/256;//Get the MSB of the xpand1 port
-  Serial.println(input, HEX);//Print the MSB of the xpand1 port to the Serial Monitor
-
+//  Serial.println(input, HEX);//Print the MSB of the xpand1 port to the Serial Monitor
   EXEC(STM);//Execute the State machine
-
-//  if(input == 1){
-//    i++;i%=0xFF;
-//    dac1.analogWrite(2048);
-//    xpand1.port(i);
-//    delay(200);
-//  }
-//
-//  if(input == 0x10){
-//    xpand1.port(0xFFFF);  
-//  }
-
-  
-
-//  xpand1.digitalWrite(7, HIGH);
-//    xpand1.digitalWrite(i, HIGH);
-//    delay(100);
-//    xpand1.digitalWrite(1, LOW);
-//    delay(100);  
-
-//  xpand1.port(0x0000);
-//  delay(1000);
 }
 
 
