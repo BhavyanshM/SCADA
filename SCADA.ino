@@ -7,6 +7,8 @@
 
 #define XPAND_1_CS_PIN 2 //Chip Select Pin for the first MCP23S17
 #define DAC_CS_PIN 5 //Chip Select Pin for the MCP4921
+#define SR04_TRIG_PIN 9 //Trig Output Pin for Ultrasound Sensor
+#define SR04_ECHO_PIN 8 //Echo Input Pin for Ultrasound Sensor
 
 MCP23S17 xpand1 = MCP23S17( XPAND_1_CS_PIN, 0x01 );//Address B001
 MCP492X dac1 = MCP492X(DAC_CS_PIN);//DAC Instantiation
@@ -32,6 +34,9 @@ void setup() {
   xpand1.pinMode(13, INPUT);
   xpand1.pinMode(14, INPUT);
   xpand1.pinMode(15, INPUT);
+
+  pinMode(SR04_TRIG_PIN, OUTPUT);
+  pinMode(SR04_ECHO_PIN, INPUT);
 
   Serial.begin(9600);
   
@@ -75,4 +80,18 @@ State S2(){
   delay(200);
   if(input==0x20 || input==0x21)STM.Set(S0);
   if(input==0x10 || input==0x11)STM.Set(S1);
+  if(input==0x80 || input==0x81)STM.Set(S3);
+}
+
+int duration, distance = 0;
+State S3(){
+    Serial.print("State_3:");
+    digitalWrite(SR04_TRIG_PIN, HIGH);
+    delay(1);
+    digitalWrite(SR04_TRIG_PIN, LOW);
+    duration = pulseIn(SR04_ECHO_PIN, HIGH);
+    distance = duration/2/29.1;
+    Serial.println(distance);
+    xpand1.port(distance);  
+    if(distance<15)STM.Set(S1);
 }
