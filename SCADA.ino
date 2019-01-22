@@ -79,8 +79,8 @@ State S2(){
   xpand1.port(i);
   delay(200);
   if(input==0x20 || input==0x21)STM.Set(S0);
-  if(input==0x10 || input==0x11)STM.Set(S1);
   if(input==0x80 || input==0x81)STM.Set(S3);
+  if(input==0x10 || input==0x11)STM.Set(S1);
 }
 
 int duration, distance = 0;
