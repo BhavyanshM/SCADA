@@ -1,3 +1,4 @@
+import pygui
 from pymodbus.client.sync import ModbusTcpClient
 import time
 
