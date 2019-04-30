@@ -1,4 +1,3 @@
-import pygui
 from pymodbus.client.sync import ModbusTcpClient
 import time
 
@@ -14,7 +13,7 @@ while True:
 	rr = client.read_holding_registers(0, 8, unit=UNIT)
 	#result = client.read_coils(1,1)
 	print(rr.registers)
-	time.sleep(0.1)
+	time.sleep(0.01)
 	f.write(str(rr.registers)+"\n")
 
 f.close()
