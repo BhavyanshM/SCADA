@@ -3,10 +3,24 @@
 
 <ScatterTextWidget>:
 	orientation: 'vertical'
+	pos_hint:{"top":1}
+	height:800
 	FloatLayout:
 		Scatter:
+			cols:3
 			Gauge:
+				pos:(100,200)
 				id: my_gauge
+				size_gauge: 255
+				size_text: 25
+			Gauge:
+				pos:(350,200)
+				id: sin_gauge
+				size_gauge: 255
+				size_text: 25
+			Gauge:
+				pos:(600,200)
+				id: count_gauge
 				size_gauge: 255
 				size_text: 25
 
