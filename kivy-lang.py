@@ -22,7 +22,7 @@ class ScatterTextWidget(BoxLayout):
 
 class MyApp(App):
     def build(self):
-    	Clock.schedule_interval(self.gauge_update, 0.1)
+    	Clock.schedule_interval(self.gauge_update, 0.01)
     	return ScatterTextWidget()
 
     def gauge_update(self, *args):
