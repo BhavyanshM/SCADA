@@ -17,7 +17,7 @@ byte gateway[] = {192, 168, 0, 1};
 byte subnet[] = {255, 255, 255, 0};
 
 long duration;
-int distance;
+int distance, prev_distance;
 int sw, count;
 
 void monitoring(){
@@ -29,21 +29,15 @@ void monitoring(){
   
   
 //  Serial.println(Mb.MBHoldingRegister[2]);
-//  digitalWrite(TRIG_PIN, LOW);;
-//  delayMicroseconds(2);
-//  digitalWrite(TRIG_PIN, HIGH);
-//  delayMicroseconds(10);
-//  digitalWrite(TRIG_PIN, LOW);
-//
-//  duration = pulseIn(ECHO_PIN, HIGH);
-//  distance = duration * 0.034/2;
 
   sw = digitalRead(SWITCH_PIN);
-  distance = (analogRead(A0) - 630)/2;
-//  Serial.print("Switch = ");
+  int new_distance = (analogRead(A0) - 630)/2;
+  distance = (new_distance + prev_distance)/2;
+  prev_distance = new_distance;
+  
   Serial.print(-50+(-10)*sw);Serial.print("\t");Serial.println(sinSwitchVal);
   if(sw == 0){
-    count++;
+    count+=2;
   }
   delay(50);
 }
